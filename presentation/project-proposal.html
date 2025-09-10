@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Reveal.js Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme">
+</head>
+<body>
+
+<div class="reveal">
+  <div class="slides">
+    <section>Welcome to Reveal.js</section>
+    <section>
+      <h2>Another Slide</h2>
+      <p>With some content here.</p>
+    </section>
+  </div>
+</div>
+
+<script type="module">
+  import Reveal from './node_modules/reveal.js/dist/reveal.esm.js';
+
+  const deck = new Reveal();
+  deck.initialize();
+</script>
+
+</body>
+</html>
