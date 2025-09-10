@@ -14,9 +14,13 @@ package = true
 # https://docs.astral.sh/uv/concepts/projects/workspaces/#workspace-sources
 http2_api                = { workspace = true }
 http3_api                = { workspace = true }
+garage                  = { workspace = true }
 
 [tool.uv.workspace]
-members = ["apis/*"]
+members = [
+    "apis/*",
+ "kernel/garage",
+]
 
 [build-system]
 requires = ["uv_build>=0.8.15,<0.9.0"]
