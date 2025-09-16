@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Reveal.js Presentation</title>
+  <title>QUIC Object Store Proposal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
   <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme">
@@ -11,11 +11,159 @@
 
 <div class="reveal">
   <div class="slides">
-    <section>Welcome to Reveal.js</section>
-    <section>
-      <h2>Another Slide</h2>
-      <p>With some content here.</p>
+    <!-- Intorduction Slide -->
+    <section data-background-gradient="linear-gradient(to bottom, #283b95, #17b2c3)">
+        <h2> QUIC based Object Storage (QUIC Object Store)</h2>
+        <h4>Project Proposal</h4>
+        <h5>Presented by: Laxminarayana Vadnala</h5>
+        <h5>Professor: Dr. Fanxin Kong</h5>
     </section>
+
+
+    <section data-background-gradient="radial-gradient(#41295a, #2F0743)">
+        <!-- proposal Content -->
+        <section>
+          <h2>Proposal Content</h2>
+          <ol>
+            <li>Introduction</li>
+            <li>Types of Storage Systems</li>
+            <li>Object Storage Current State</li>
+            <li>Proposed Idea</li>
+            <li>Methodology</li>
+            <li>Expected Outcomes</li>
+            <li>References</li>
+          </ol>
+        </section>
+
+        <!-- Introduction Slide -->
+        <section>
+          <h2>Introduction</h2>
+          <p>Data is the fuel cell for every organization these, so organiziing there data is one of the most demanding needs. with data demands organizations
+          are looking for more scalable, reliable and cost effective storage solutions. There are mainly three types of storage systems available to store data. They are
+          <ol>
+            <li>File Storage</li>
+            <li>Block Storage</li>
+            <li>Object Storage</li>
+          </ol>
+          <p>let me summarize each of them quickly.</p>
+          </p>
+        </section>
+
+        <!-- Types of Storage Systems -->
+         <section>
+          <h2>Types of Storage Systems</h2>
+        </section>
+
+        <section>
+          <h3>File Storage</h3>
+          <p>File storage is the most common and traditional way of storing data. In file storage data is stored in a hierarchical structure with files and folders. It is easy to use and manage, but it has limitations in terms of scalability and performance.</p>
+        </section>
+        
+        <section>
+          <h3>Block Storage</h3>
+          <p>Block storage is a more advanced way of storing data. In block storage, data is divided into fixed-size blocks and each block is assigned a unique identifier. It provides better performance and scalability compared to file storage, but it requires more management and configuration.</p>
+        </section>
+
+        <section>
+          <h3>Object Storage</h3>
+          <p>Object storage is a modern way of storing data. In object storage, data is stored as objects with metadata and a unique identifier. It provides high scalability, durability, and cost-effectiveness. It is ideal for storing unstructured data such as images, videos, and documents.</p>
+        </section>
+
+      </section>
+
+
+      <!-- Object Storage Current State Slide -->
+      <section data-background-gradient="radial-gradient(#0f2027, #203a43, #2c5364)">
+        <section>
+          <h2>Object Storage Current State</h2>
+          <p>Object storage is widely used in cloud computing and big data applications. Some of the popular object storage systems are Amazon S3, Google Cloud Storage, and Microsoft Azure Blob Storage.
+        </section> 
+        <section>
+          <h2>Object Storage Current State</h2>
+          <img src="assets/blockVsObjectStore.png" alt="Object Storage Market" style="width:70%; height:70%;">
+        </section>
+        <section>
+          <h2>Object Storage Current State</h2>
+          <p>if we have Object Storage System how to it is access in SAN (Secure Area Network)?</p>
+        </section>
+        <section>
+          <h2>Object Storage Current State</h2>
+          <p>Access is possible through any Network protocols like UDP, HTTP2.0, HTTP1.1, HTTPS (TLS/SSL) and UDP</p>
+        </section>
+
+      </section> 
+
+
+      <section data-background-gradient="radial-gradient(#000428, #004e92)">
+        <!-- Proposed Solution Section and Intro to QUIC Protocol -->
+        <section>
+          <h2>Oppurtunity</h2>
+          <p>The proposed idea is to develop a QUIC based object storage system that can provide high performance, scalability, and security.</p>
+          <p>QUIC is a modern transport protocol that is designed to improve the performance of web applications. It provides low latency, multiplexing, and improved security features.</p>
+        </section>
+        <section>
+          <h2>QUIC Introduction</h2>
+          <ol>
+            <li>QUIC = Quick UDP Internet Connections</li>
+            <li>Next-generation transport protocol developed by Google</li>
+            <li>Foundation for HTTP/3 (the latest web protocol)</li>
+            <li>Deployed across Google services (Chrome, YouTube, Gmail)</li>
+          </ol>
+        </section>
+        <section>
+          <h2>What QUIC Solves from HTTP2.0</h2>
+          <ol>
+            <li>Head-of-Line Blocking: One lost packet stops ALL data streams</li>
+            <li>TCP Handshake Overhead: Multiple round trips to establish connection</li>
+            <li>Slow Connection Setup: 3 RTT for secure HTTPS connections</li>
+          </ol>
+        </section>
+      </section>
+
+      <section data-background-gradient="radial-gradient(#2c0f0f, #000000)">
+        <section>
+          <h2>Methodology</h2>
+          <p>we have open source object kernels for instance am using <a href="https://garagehq.deuxfleurs.fr/">GARAGE Open Source Distributed OSS</a></p>
+        </section>
+
+        <section>
+          <h2>Object Storage System Structure</h2>
+          <img src="assets/OStorageNetwork.png" alt="Object Storage System Structure" style="width:70%; height:70%;">
+        </section>
+
+        <section>
+          <h2>Methodology</h2>
+          <p>we will replace the existing network protocol with QUIC protocol and test the performance of the system.</p>
+        </section>
+
+        <section>
+          <h2>Methodology</h2>
+          <p>we will compare aspects both in single node system, how the performance is in while scaling Object Storage, by enabling security and disabling it.</p>
+        </section>
+
+      </section>
+
+      <section data-background-gradient="radial-gradient(#1f1c2c, #928DAB)">
+        <section>
+          <h2>Expected Outcomes</h2>
+          <ol>
+            <li>High Performance: Reduced latency and improved throughput for data access.</li>
+            <li>Scalability: Ability to handle large amounts of data and concurrent users.</li>
+            <li>Security: Enhanced security features to protect data in transit and at rest.</li>
+            <li>Cost-Effectiveness: Reduced infrastructure costs due to efficient resource utilization.</li>
+          </ol>
+        </section>
+      </section>
+
+
+      <section>
+        Reference Papers:
+        <ul>
+          <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1612479">Object Storage: The Future Building Block for Storage Systems</a></li>
+          <li><a href="https://dl.acm.org/doi/pdf/10.1145/3098822.3098842">The QUIC Transport Protocol: Design and Internet-Scale Deployment</a></li>
+          <li><a href="https://www.vldb.org/pvldb/vol16/p2769-durner.pdf">Exploiting Cloud Object Storage for High-Performance Analytics</a></li>
+        </ul>
+      </section>
   </div>
 </div>
 
