@@ -15,9 +15,11 @@ ENV PATH="/root/.local/bin/:$PATH"
 WORKDIR /app
 COPY . .
 
+ENV WORKER_ID="laxminarayana"
+
 RUN uv python install 3.12
 RUN uv python pin 3.12
 RUN uv sync
 
 EXPOSE 50051
-CMD ["uv", "run", "client.py", "--port", "50051"]
+CMD ["uv", "run", "client.py","--host", "grpc_server", "--port", "50051"]

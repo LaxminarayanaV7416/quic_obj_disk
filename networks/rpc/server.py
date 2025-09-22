@@ -13,7 +13,10 @@ import argparse
 from concurrent import futures
 import grpc
 # we will import protobuf generated classes
-from heartBeat_pb2_grpc import workerHeartBeatServiceServicer
+from heartBeat_pb2_grpc import (
+    workerHeartBeatServiceServicer, 
+    add_workerHeartBeatServiceServicer_to_server
+)
 import heartBeat_pb2 as heartBeat_pb2
 
 
@@ -26,10 +29,10 @@ class workerHeartBeatServiceServicerImplmentation(workerHeartBeatServiceServicer
             request: heartBeat_pb2.workerHeartBeat, 
             context: grpc.aio.ServicerContext
         ) -> heartBeat_pb2.mastersHeartBeatResponse:
-        logging.info(f"Received heartbeat from worker ID: {request.worker_id}")
+        logging.info(f"Received heartbeat from worker ID: {request.workerNumber} at time: {request.timestamp} and is alive: {request.alive}")
         # Process the heartbeat (e.g., update worker status in a database)
         #TODO: Need work here what to do we will figure it out later
-        response = heartBeat_pb2.mastersHeartBeatResponse( recieved_heart_beat=True )
+        response = heartBeat_pb2.mastersHeartBeatResponse( recievedHeartBeat=True )
         return response
 
 
@@ -60,6 +63,7 @@ async def server(port: int = 50051,
         server = grpc.aio.server(futures.ThreadPoolExecutor(max_workers=max_workers))
         server.add_insecure_port(f'[::]:{port}')
         logging.info(f"Starting insecure gRPC server on port {port} which is INSECURE")
+    add_workerHeartBeatServiceServicer_to_server(workerHeartBeatServiceServicerImplmentation(), server)
     await server.start()
     logging.info("Server started successfully")
     await server.wait_for_termination()
