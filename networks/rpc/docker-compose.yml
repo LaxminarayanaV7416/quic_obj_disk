@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+
+  grpc_server:
+    build:
+      context: .
+      dockerfile: ServerDockerFile
+    restart: always
+    container_name: grpc_server
+    ports:
+      - 50051:50051
+    networks:
+      - object_store_network
+    
+  grpc_client:
+    build:
+      context: .
+      dockerfile: ClientDockerFile
+    restart: always
+    container_name: grpc_client
+    networks:
+      - object_store_network
+
+networks:
+  object_store_network:
+    driver: bridge
