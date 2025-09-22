@@ -24,7 +24,8 @@ garage                  = { workspace = true }
 [tool.uv.workspace]
 members = [
     "apis/*",
- "kernel/garage",
+    "kernel/garage",
+    "networks/rpc",
 ]
 
 [build-system]

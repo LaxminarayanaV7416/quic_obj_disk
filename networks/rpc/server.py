@@ -13,8 +13,8 @@ import argparse
 from concurrent import futures
 import grpc
 # we will import protobuf generated classes
-from .heartBeat_pb2_grpc import workerHeartBeatServiceServicer
-import .heartBeat_pb2 as heartBeat_pb2
+from heartBeat_pb2_grpc import workerHeartBeatServiceServicer
+import heartBeat_pb2 as heartBeat_pb2
 
 
 class workerHeartBeatServiceServicerImplmentation(workerHeartBeatServiceServicer):
@@ -74,7 +74,7 @@ def argument_parser() -> argparse.Namespace:
     """
     parser = argparse.ArgumentParser(description="RPC Server")
     parser.add_argument("--port", type=int, default=50051, help="Port number to listen on")
-    parser.add_argument("--secure", action="store_true", help="Use secure channel", required=True)
+    parser.add_argument("--secure", action="store_true", help="Use secure channel")
     parser.add_argument("--cert", type=str, help="Path to SSL certificate", required=False)
     parser.add_argument("--cert-key", type=str, help="Path to SSL certificate key", required=False)
     parser.add_argument("--max-workers", type=int, default=4, help="Maximum number of worker threads")

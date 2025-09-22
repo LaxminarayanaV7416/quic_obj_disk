@@ -1,0 +1,23 @@
+FROM ubuntu:22.04
+
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends curl ca-certificates software-properties-common 
+
+# Download the latest installer
+ADD https://astral.sh/uv/install.sh /uv-installer.sh
+
+# Run the installer then remove it
+RUN sh /uv-installer.sh && rm /uv-installer.sh
+
+# Ensure the installed binary is on the `PATH`
+ENV PATH="/root/.local/bin/:$PATH"
+
+WORKDIR /app
+COPY . .
+
+RUN uv python install 3.12
+RUN uv python pin 3.12
+RUN uv sync
+
+EXPOSE 50051
+CMD ["uv", "run", "server.py", "--port", "50051"]
