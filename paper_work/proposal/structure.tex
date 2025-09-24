@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lachaise Assignment
+% Structure Specification File
+% Version 1.0 (26/6/2018)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Marion Lachaise & François Févotte
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\usepackage{amsmath,amsthm,amsfonts,amssymb,graphicx,mathrsfs,mathtools,bm,stmaryrd,xcolor,enumerate,physics,tikz}
+\usepackage[margin=1in]{geometry}
+
+
+%----------------------------------------------------------------------------------------
+%	FONTS
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\FF}{\mathbb{F}}
+
+% Script Characters
+\newcommand{\T}{\mathcal{T}} %mathscr also exists, but it tends to be too fancy for anything other than algebraic geometry
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\Q}{\mathcal{Q}}
+
+% Boldscript Numbers
+\newcommand{\0}{\mathbb{0}}
+\newcommand{\1}{\mathbb{1}}
+
+% Functions
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+
+% New commands
+\newcommand{\ra}{\rightarrow}
+% \newcommand{\la}{\leftarrow}
+\newcommand{\nor}{\vartriangleleft}
+\newcommand{\bracket}[1]{[#1]}
+\newcommand{\aut}{\text{Aut }}
+\newcommand{\spec}{\text{Spec }}
+\newcommand{\inn}{\text{Inn}}
+\newcommand{\solidline}{\\\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}\\}
+
+
+% Renewing commands
+\renewcommand{\Im}{\text{Im }}
+\renewcommand{\Re}{\text{Re }}
+\renewcommand{\hom}{\text{Hom}}
+\renewcommand{\bar}{\overline}
+\renewcommand{\l}{\langle}
+\renewcommand{\r}{\rangle}
+\newcommand{\vbrack}[1]{\left\langle #1\right\rangle}
+\renewcommand{\theenumi}{\alph{enumi}}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+% Griffith's commands
+\usetikzlibrary{arrows,scopes} %tikz libraries used to draw the glyphs
+%defining script r (scalar)
+\newcommand{\rc}{%
+\resizebox{!}{1.25ex}{%
+    \begin{tikzpicture}[>=round cap]
+        \clip (0.09em,-0.05ex) rectangle (0.61em,0.81ex);
+        \draw [line width=.11ex, <->, rounded corners=0.13ex] (0.1em,0.1ex) .. controls (0.24em,0.4ex) .. (0.35em,0.8ex) .. controls (0.29em,0.725ex) .. (0.25em,0.6ex) .. controls (0.7em,0.8ex) and (0.08em,-0.4ex) .. (0.55em,0.25ex);
+    \end{tikzpicture}%
+}%
+}
+
+%defining bold script r (vector)
+\newcommand{\brc}{%
+\resizebox{!}{1.3ex}{%
+    \begin{tikzpicture}[>=round cap]
+        \clip (0.085em,-0.1ex) rectangle (0.61em,0.875ex);
+        \draw [line width=.2ex, <->, rounded corners=0.13ex] (0.1em,0.1ex) .. controls (0.24em,0.4ex) .. (0.35em,0.8ex) .. controls (0.29em,0.725ex) .. (0.25em,0.6ex) .. controls (0.7em,0.8ex) and (0.08em,-0.4ex) .. (0.55em,0.25ex);
+    \end{tikzpicture}%
+}%
+}
+
+%defining bold script r with a hat (unit vector)
+\newcommand{\hrc}{\hat{\brc}}
+
+\newcommand{\perm}{4 \pi \epsilon_0}
+\newcommand{\bvec}[1]{\hat{\textbf{#1}}}

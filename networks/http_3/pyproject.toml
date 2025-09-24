@@ -1,0 +1,9 @@
+[project]
+name = "http-3"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aioquic>=1.2.0",
+]

@@ -2,3 +2,4 @@
 *_pb2.py
 *_pb2_grpc.py
 __pycache__
+.DS_Store

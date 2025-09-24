@@ -26,6 +26,7 @@ members = [
     "apis/*",
     "kernel/garage",
     "networks/rpc",
+    "networks/http_3",
 ]
 
 [build-system]

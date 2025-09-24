@@ -4,6 +4,7 @@ requires-python = ">=3.12"
 
 [manifest]
 members = [
+    "http-3",
     "http2-api",
     "http3-api",
     "quic-obj-disk",
@@ -236,6 +237,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/2c/48/71de9ed269fdae9c8
 wheels = [
     { url = "https://files.pythonhosted.org/packages/07/c6/80c95b1b2b94682a72cbdbfb85b81ae2daffa4291fbfa1b1464502ede10d/hpack-4.1.0-py3-none-any.whl", hash = "sha256:157ac792668d995c657d93111f46b4535ed114f0c9c8d672271bbec7eae1b496", size = 34357, upload-time = "2025-01-22T21:44:56.92Z" },
 ]
+
+[[package]]
+name = "http-3"
+version = "0.1.0"
+source = { virtual = "networks/http_3" }
+dependencies = [
+    { name = "aioquic" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "aioquic", specifier = ">=1.2.0" }]
 
 [[package]]
 name = "http2-api"
