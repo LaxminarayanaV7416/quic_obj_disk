@@ -13,7 +13,7 @@
     eg:
     ```{json}
         {
-            "Creation-Date": "2025-01-01T00:00:000000Z", 
+            "Creation-Date": "2025-01-01T00:00:000000Z",
             "Content-Length": 500,
             "Content-Type": "application/json",
             "Last-Modified": "2025-01-01T00:00:000000Z"
@@ -22,4 +22,16 @@
 
     b. RPC network - we are going use the GRPC framework here and we here is the link to the github with examples [Github Link](https://github.com/grpc/grpc) and the documentation link for the gRPC website with python guide is [Python Guide](https://grpc.io/docs/languages/python/quickstart/)
 
-    
+### Rough implementation of the comparision framework:
+-------------------------------------------------------
+* RocksDB overview foe the project `https://github.com/facebook/rocksdb/wiki/RocksDB-Overview`
+* we will use the RocksDB which is a ACID compliant persisitent file system based key value store for the object storage.
+* Link to the python module is `https://python-rocksdb.readthedocs.io/en/latest/` we install this using `pip install python-rocksdb`
+*
+
+
+Design Idea:
+-----------
+-> Write a singleton class following all the options of RocksDB
+-> Work on the installation of RocksDB using Ubuntu Docker Container and note this sits in Master Container itself.
+-> 

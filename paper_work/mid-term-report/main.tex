@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\newcommand\defaultstyle{\everymath{\displaystyle}}
+\input{structure.tex}
+\graphicspath{{./figures/}}
+\usepackage{breqn,url,hyperref,listings,color,float, siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\urlstyle{same}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+    %   basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=b,                    % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    firstnumber=1,                   % start line enumeration with line 1
+    frame=single,	                   % adds a frame around the code
+    keepspaces=false,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    language=C,                 % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=none,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{mymauve},     % string literal style
+    tabsize=2,	                   % sets default tabsize to 2 spaces
+    title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{assembly}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegray},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=[x86masm]Assembler
+}
+
+
+\begin{document}
+\defaultstyle
+\title{\vspace{-8ex}FA25-CSE-60641 - Mid-Term Report}
+
+\author
+    {
+        Laxminarayana Vadanala\\
+        Dr. Fanxin kong\\
+        \textbf{Prism Store - An QUIC based Object Storage System}\\
+        The University of Notre Dame \vspace{-1.75ex}
+    }
+
+\maketitle
+%---------------------------------------------------------------%
+
+
+% Lets start documentation from here for the proposal
+% ---------------------------------------------------------------%
+\section*{Project Proposal: Prism Store - An QUIC based Object Storage System}
+
+
+\subsection*{NOTE::}
+Am still working on the implementation of the project. I dont have much updates for the project as this report should
+consist of the graphs and final results. will much of the information in the final report.
+
+\subsection*{Abstract}
+This project proposes the design and implementation of a novel object storage kernel called PrismStore,
+specifically engineered to evaluate and optimize network protocol performance in distributed storage systems.
+The research aims to comprehensively analyze the impact of modern network protocols—HTTP/3 with QUIC, HTTP/2,
+and gRPC—on both client-server communication and inter-node coordination in object storage.
+\begin{enumerate}
+    \item \subsection*{Problem Statement}
+        Current object storage systems predominantly rely on traditional HTTP/1.1 and HTTP/2 protocols for communication, potentially leaving significant performance
+        improvements unexploited. The performance of distributed storage systems heavily depends on network efficiency and I/O operations.
+        With the emergence of HTTP/3 (QUIC) and gRPC protocols,
+        there exists an opportunity to enhance storage system performance through strategic protocol selection and configuration.
+    \item \subsection*{Primary Goal}
+        Design and develop PrismStore, a custom object storage kernel that enables comprehensive evaluation of different network protocols' impact on
+        storage system performance.
+    \item \subsection*{Secondary Objectives}
+        \begin{itemize}
+            \item Establish performance benchmarks against existing solutions (MinIO)
+            \item Identify optimal protocol combinations for different communication channels
+            \item Provide empirical evidence for protocol selection in distributed storage systems
+            \item Develop a reference implementation for future object storage research
+        \end{itemize}
+
+    \item \subsection*{Technical Approach}
+
+        \begin{itemize}
+            \item \textbf{System Architecture}
+
+                PrismStore will implement a distributed object storage system with configurable network protocols for two distinct communication channels:
+                \begin{itemize}
+                    \item Client-to-Server Communication: External client access to the storage system
+                    \item Inter-Node Communication: Internal coordination between worker and master nodes
+                \end{itemize}
+
+            \item \textbf{Technical details of System Architecture}
+
+                PrismStone uses a distributed architecture with a master-worker model. where each worker node is responsible for handling the storage and sends
+                the metadata information to master node. where master node uses the RingBuffer and atomic operations to save the metadata information to persistent
+                Key Value storage system called RocksDB. where when the client requests the data for download, Master node will gather all the information from the worker
+                nodes and send it to the client. In case of client uploads master node will recieve all the information about the file and sends the instructions to worker
+                nodes to store the data. this data is stored in chunks or objects on the worker nodes.
+
+
+            \item \textbf{Protocol Implementation}
+
+                All protocols will be implemented with TLS 1.3 encryption to ensure security consistency across comparisons:
+                    \begin{itemize}
+                        \item HTTP/3 with QUIC: Modern protocol with built-in multiplexing and congestion control
+                        \item HTTP/2: Multiplexed HTTP with server push capabilities
+                        \item gRPC: High-performance RPC framework utilizing HTTP/2 transport
+                    \end{itemize}
+
+            \item \textbf{Performance Evaluation Framework}
+
+                The evaluation will systematically test protocol combinations across both communication channels, creating a comprehensive performance matrix.
+        \end{itemize}
+
+    \item \subsection*{Methodology}
+    \begin{itemize}
+        \item \textbf{ Phase 1: Core System Development}
+
+        Develop the PrismStore kernel with modular network protocol support, ensuring consistent functionality across all protocol implementations.
+        \item \textbf{ Phase 2: Baseline Establishment}
+
+        Deploy PrismStore with HTTP/2 configuration and benchmark against MinIO object storage system to establish credibility and performance baselines.
+        \item \textbf{ Phase 3: Protocol Evaluation}
+            \begin{itemize}
+                \item Step 1: Client Communication Analysis
+                    Compare HTTP/2 vs. HTTP/3 for client-server interactions
+                    Measure throughput, latency, and resource utilization
+
+                \item Step 2: Inter-Node Communication Analysis
+                    Evaluate protocol impact on worker-master node coordination
+                    Assess scalability and fault tolerance characteristics
+
+                \item Step 3: Cross-Protocol Evaluation
+                    Test gRPC for both communication channels
+                    Analyze performance against HTTP-based protocols
+            \end{itemize}
+
+        \item \textbf{ Phase 4: Optimization and Configuration Selection}
+
+            Systematically evaluate all possible protocol combinations to identify the optimal configuration for different workload patterns and network conditions.
+    \end{itemize}
+
+    \item \subsection*{Expected Outcomes}
+        \begin{itemize}
+            \item \textbf {Research Contributions:} Comprehensive performance analysis of modern network protocols in object storage systems
+            Empirical evidence for protocol selection guidelines in distributed storage architectures
+            Open-source PrismStore implementation as a research platform
+            \item \textbf {Performance Insights:} Quantitative comparison of protocol efficiency in storage workloads
+            Identification of optimal protocol combinations for different use cases
+            Network overhead analysis and resource utilization patterns
+            \item \textbf {Practical Impact:} Performance optimization strategies for existing object storage deployments
+            Protocol selection framework for storage system architects
+            Reference implementation for educational and research purposes
+        \end{itemize}
+
+    \item \subsection*{Evaluation Metrics}
+        Primary Metrics
+        \begin{itemize}
+            \item Throughput: Data transfer rates for upload/download operations
+            \item Latency: Response times for storage operations
+            \item Scalability: Performance degradation with increasing node count
+            \item Resource Utilization: CPU, memory, and network resource consumption
+        \end{itemize}
+        Secondary Metrics
+        \begin{itemize}
+            \item Connection Overhead: Protocol establishment and maintenance costs
+            \item Error Recovery: Performance under network failure conditions
+            \item Concurrent Operations: Multi-client access patterns
+        \end{itemize}
+
+    \item \subsection*{Timeline and Deliverables}
+        The project will deliver a complete PrismStore implementation with comprehensive performance evaluation results, demonstrating the impact of network protocol
+        selection on distributed object storage system performance.
+        The final system configuration will represent the optimal protocol combination identified through systematic evaluation.
+    \item \subsection*{Significance}
+        This research addresses a critical gap in understanding how modern network protocols can enhance distributed storage system performance.
+        By providing empirical evidence and a reference implementation,
+        the project will contribute valuable insights to both academic research and industry practice in distributed systems architecture.
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
