@@ -34,4 +34,5 @@ Design Idea:
 -----------
 -> Write a singleton class following all the options of RocksDB
 -> Work on the installation of RocksDB using Ubuntu Docker Container and note this sits in Master Container itself.
+-> Implement client endpoint which does alot of work on the uploading part and downloading part of the object storage, where the chunking and all is done by this client handler.
 -> 
