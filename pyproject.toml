@@ -5,8 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "aiohttp>=3.13.2",
     "grpcio>=1.75.0",
     "grpcio-tools>=1.75.0",
+    "loguru>=0.7.3",
     "protobuf>=6.32.1",
     "python-dateutil>=2.9.0.post0",
 ]
@@ -14,20 +16,6 @@ dependencies = [
 
 [tool.uv]
 package = true
-
-[tool.uv.sources]
-# https://docs.astral.sh/uv/concepts/projects/workspaces/#workspace-sources
-http2_api                = { workspace = true }
-http3_api                = { workspace = true }
-garage                  = { workspace = true }
-
-[tool.uv.workspace]
-members = [
-    "apis/*",
-    "kernel/garage",
-    "networks/rpc",
-    "networks/http_3",
-]
 
 [build-system]
 requires = ["uv_build>=0.8.15,<0.9.0"]
