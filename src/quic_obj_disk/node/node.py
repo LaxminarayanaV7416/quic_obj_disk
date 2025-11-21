@@ -4,7 +4,7 @@ import time
 from typing import Any
 
 from loguru import logger
-from network_interface import DHTRouter, NetworkLayer
+from node.network_interface import DHTRouter, NetworkLayer
 from obj_kernel.base import CRDTMetadata
 from obj_kernel.bucket import Bucket
 from obj_kernel.object import Object
@@ -23,7 +23,7 @@ class StorageNode:
         self.db = persistence
         self.network = network
         self.dht = dht
-        self.logger = logger.getLogger(node_id)
+        self.logger = logger
 
     # -----------------------------------------------------
     # A. Peer Onboarding
